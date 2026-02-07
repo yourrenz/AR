@@ -2,43 +2,66 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>AR Projesi - Marker Takibi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Projesi v1.0.0</title>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     
     <style>
-        /* Sağ üst köşe versiyon etiketi */
-        #version-overlay {
+        /* Sağ üst köşedeki Versiyon Etiketi */
+        #ui-overlay {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 8px 15px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            z-index: 999; /* Kameranın her zaman üstünde kalması için */
-            pointer-events: none; /* Tıklamaları engellememesi için */
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            padding: 10px 15px;
+            background: rgba(44, 62, 80, 0.85); /* Modern koyu mavi tonu */
+            color: #ecf0f1;
+            font-family: 'Arial', sans-serif;
+            font-size: 13px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            pointer-events: none;
         }
     </style>
 </head>
 
 <body style="margin: 0; overflow: hidden;">
-    <div id="version-overlay">Version 1.0.0</div>
 
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix;">
+    <div id="ui-overlay">
+        <strong>PROJECT:</strong> AR_PROJESI<br>
+        <strong>VERSION:</strong> 1.0.0
+    </div>
+
+    <a-scene 
+        embedded 
+        arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix;"
+        renderer="logarithmicDepthBuffer: true;">
         
-        <a-marker type="pattern" url="pattern-ar_projesi.patt">
+        <a-marker type="pattern" url="qr/pattern-ar_projesi.patt">
             
-            <a-box position="0 0.5 0" material="color: #4CC3D9; opacity: 0.8;" animation="property: rotation; to: 0 360 0; loop: true; dur: 3000"></a-box>
-            <a-text value="AR Projesi Aktif" align="center" rotation="-90 0 0" position="0 1 0" scale="0.8 0.8 0.8"></a-text>
+            <a-torus-knot 
+                radius="0.26" 
+                radius-tubular="0.05" 
+                position="0 0.5 0"
+                material="color: #e74c3c; emissive: #c0392b;"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 4000">
+            </a-torus-knot>
             
+            <a-text 
+                value="Marker Algilandi" 
+                align="center" 
+                position="0 1.2 0" 
+                scale="0.7 0.7 0.7" 
+                color="#ffffff">
+            </a-text>
+
         </a-marker>
 
         <a-entity camera></a-entity>
+        
     </a-scene>
+
 </body>
 </html>
